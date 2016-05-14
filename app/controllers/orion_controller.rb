@@ -15,7 +15,18 @@ class OrionController < ApplicationController
     redirect_to :back
   end
 
-  def modify
+  def post_modify
+    @target = Post.find(params[:post_id])
+    @target.content = params[:content]
+    @target.save
+    redirect_to '/'
+  end
+
+  def comment_modify
+    @target = Comment.find(params[:comment_id])
+    @target.content = params[:content]
+    @target.save
+    redirect_to '/'
   end
 
   def delete
@@ -23,7 +34,7 @@ class OrionController < ApplicationController
     @post.destroy
     redirect_to :back
   end
-  
+
   def comment_delete
     @comment = Comment.find(params[:comment_id])
     @comment.destroy

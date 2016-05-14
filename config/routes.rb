@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
   root 'orion#index'
-  
+
   get 'orion/index'
 
   post 'write' => 'orion#write'
 
   post ':post_id/comment_create' => 'orion#comment_create'
-  
+
   get 'comment_delete/:comment_id' => 'orion#comment_delete'
 
-  get 'orion/modify'
+  # get 'orion/modify'
+
+  post 'orion/modify_post/:post_id' => 'orion#post_modify'
+
+  post 'orion/modify_comment/:comment_id' => 'orion#comment_modify'
 
   get 'delete/:post_id' => "orion#delete"
 
