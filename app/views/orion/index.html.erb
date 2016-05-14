@@ -1,0 +1,67 @@
+<div class="container">
+  <h1>Orion#index</h1>
+  <p>Find me in app/views/orion/index.html.erb</p>
+  <hr>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+    
+    <!--글작성-->
+      <form role="form" action="/write" method="POST">
+        <textarea class="form-control" rows="4" name="content"></textarea>
+        <button style="float:right;" type="submit" class="btn btn-default">게시</button><br><br>
+      </form>
+      
+    <!--뉴스피드-->
+        <% @posts.each do |post| %>
+        <div class="row"><hr>
+          <div class="col-xs-10">
+            <div><%= post.created_at %></div><br>
+            <div><%= post.content %></div>
+          </div>
+          <div class="col-xs-2">
+            <a href="/delete/<%= post.id %>">[삭제]</a>
+          </div>
+        </div>
+          
+
+      <!--댓글피드-->
+        <% post.comments.each do |comment| %>
+          <hr>
+          <div calss="row">
+            <div class="col-xs-7">
+              <%= comment.content %>
+            </div>
+            <div class="col-xs-3">
+               <%= comment.created_at %>
+            </div>
+            <div class="col-xs-2">
+              <a href="/comment_delete/<%= comment.id %>">[삭제]</a>
+            </div>
+          </div>
+        <% end %>
+
+        <!--댓글입력-->
+        <form action='/<%= post.id %>/comment_create' method='POST'>
+          <div class="row">
+            <br>
+            <div class="col-xs-10">
+              <input type="text" name="content" class="form-control">
+            </div>
+            <div class="col-xs-2">
+              <button style="float:right;" type="submit" class="btn btn-default">댓글입력</button>
+            </div>
+          </div>
+        </form>
+        
+        
+        <% end %>
+
+        <hr>
+        
+      </div>
+  
+    </div>
+    <div class="col-md-5"></div>
+  </div>
+</div>
